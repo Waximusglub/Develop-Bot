@@ -1,45 +1,62 @@
-//Requirments
+//Discord js 
+const { Client, Collection, Intents } = require('discord.js');
+
+//Tools
 const fs = require('node:fs');
 const path = require('node:path');
-
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 
 const { token } = require('./config.json');
 
 
 //Client
+const client = new Client({
+    intents: 3276799 //https://discord-intents-calculator.vercel.app
 
-const client = new Client({ intents: 3276799 });
+    // intents: [
+    //     Intents.FLAGS.GUILDS,
+    //     Intents.FLAGS.GUILDS_MESSAGES,
+    //     Intents.FLAGS.GUILDS_VOICE_STATES,
+    // ]
+
+});
 
 //Connect
 client.on('ready', async (client) => {
     console.log(`Bot token: ${token}`);
     console.log(`Bot is ready as: ${client.user.tag}`);
-    client.user.setActivity("Skyrim")
+    client.user.setActivity(`is programing me`, {type: 'WAXII'})
+    const deployCommands =require('./deploy-commands.js');
+    deployCommands.execute();
 })
 
 
 
-// client.commands = new Collection();
+client.commands = new Collection();
 
-// const foldersPath = path.join(__dirname, 'slash_commands');
-// const commandFolders = fs.readdirSync(commandsPath);
+const foldersPath = path.join(__dirname, 'slash_commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
-// for (const folder of commandFolders) {
+for (const folder of commandFolders) {
 
-//     const commandPath = path.join(foldersPath, folder);
-//     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+    const commandsPath = path.join(foldersPath, folder);
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-//     for (const file of commandFiles) {
+    for (const file of commandFiles) {
 
-//         const filePath = path.join(commandPath, file);
-//         const command = fs.readFileSync(filePath)
+        const filePath = path.join(commandsPath, file);
+        const command = require(filePath)
 
-//     }
+        if ('execute' in command) {
+            client.commands.set(command.data.name, command)
+        } else {
+            console.log(`Error File: ${filePath}`)
+        }
+
+    }
 
 
 
-// }
+}
 
 
 
@@ -65,11 +82,9 @@ client.on('messageCreate', async (msg) => {
 
 client.on('interactionCreate', async (interaction) => {
 
-    if (interaction.isChatInputCommand()) {
-        const { commandName } = interaction;
-        const command = require(`./slash_commands/${commandName}`);
-        command.execute(interaction);
-    }
+    if (!interaction.isChatInputCommand()) return;//We want commands only
+    const command = client.commands.get(interaction.commandName);//we gate de  comand on the collection
+    command.execute(interaction);
 
 });
 
