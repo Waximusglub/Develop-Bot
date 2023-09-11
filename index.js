@@ -5,10 +5,12 @@ const { Client, Collection, Intents } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
 
+//Config
 const { token } = require('./config.json');
 
 
-//Client
+//Client Object
+//##################################################
 const client = new Client({
     intents: 3276799 //https://discord-intents-calculator.vercel.app
 
@@ -20,6 +22,9 @@ const client = new Client({
 
 });
 
+
+//Slash Command Handler
+//##################################################
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, 'slash_commands');
@@ -45,6 +50,10 @@ for (const folder of commandFolders) {
 
 }
 
+
+
+//Event Handler
+//##################################################
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -60,5 +69,6 @@ for (const file of eventFiles) {
 
 
 //Connect
+//##################################################
 client.login(token);
 
