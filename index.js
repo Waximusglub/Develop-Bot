@@ -50,8 +50,6 @@ for (const folder of commandFolders) {
 
 }
 
-
-
 //Event Handler
 //##################################################
 const eventsPath = path.join(__dirname, 'events');

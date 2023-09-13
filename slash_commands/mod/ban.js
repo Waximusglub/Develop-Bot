@@ -16,17 +16,17 @@ module.exports = {
                 .setName('reason')
                 .setDescription('The ban reason')
         )
-        .setDEfaultMemberPermissions(PermissionFlagsBits.BanMembers)
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
 
     async execute(interaction) {
 
         const target = interaction.options.getUser('target');
 
-        const reason = interaction.options.getUser('reason') ?? `The administrator don't provided a reason`;
+        const reason = interaction.options.getString('reason') ?? `The administrator don't provided a reason`;
 
 
-        await interaction.replay(`Banning ${target.username} for reason: \n ${reason}`)
+        await interaction.reply(`Banning ${target.username} for reason:\n${reason}`);
         await interaction.guild.members.ban(target);
     },
 };
