@@ -1,12 +1,10 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder} = require('@discordjs/builders');
 const axios = require('axios');
 
 module.exports = {
-  //Data
-  //###########################
   data: new SlashCommandBuilder()
-    .setName('wiki_summary')
-    .setDescription('Search something on wikipedia.')
+    .setName('random')
+    .setDescription('Gets a random portal from wikipedia.')
     .addStringOption(option =>
       option
         .setName('lang')
@@ -17,29 +15,20 @@ module.exports = {
           { name: 'Spanish', value: 'es' },
           { name: 'Catalan', value: 'ca' },
         )
-    )
-    .addStringOption(option =>
-      option
-        .setName('term')
-        .setDescription(`Insert the subject`)
-        .setRequired(true)
     ),
 
-  //Execute
-  //###########################
   async execute(interaction) {
 
-    const lang = interaction.options.getString('lang');
-    const term = interaction.options.getString('term');
-
     try {
+
+      const lang = interaction.options.getString('lang');
 
       //Get Data from Wikipedia API
       //##################################
 
       const options = {
         method: 'GET',
-        url: `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${term}`
+        url: `https://${lang}.wikipedia.org/api/rest_v1/page/random/summary`
       };
 
       const response = await axios.request(options);
@@ -60,15 +49,16 @@ module.exports = {
           { name: '\u200B', value: '\u200B' },//Unicode empty space
         )
         .setTimestamp()
-        .setFooter({ text: `Summary requested by ${interaction.user.username}`, iconURL: `${interaction.user.displayAvatarURL()}` });
+        .setFooter({ text: `Random requested by ${interaction.user.username}`, iconURL: `${interaction.user.displayAvatarURL()}` });
 
       interaction.reply({ embeds: [embed] });
 
     } catch (error) {
 
-      console.error(error);
-      interaction.reply('Error on getting de data form Wikipedia.');
-
     }
+
+
+
+
   },
 };
