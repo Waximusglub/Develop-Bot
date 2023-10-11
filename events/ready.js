@@ -5,6 +5,6 @@ module.exports = {
 	once: true,
 	execute(client) {
         console.log(`Bot is ready as: ${client.user.tag}`);
-        client.user.setPresence({ activities: [{ name: 'Happy c:' }], status: 'idle' });
+        client.user.setPresence({ activities: [{ name: 'Always Ready' }], status: 'online' });
 	},
 };

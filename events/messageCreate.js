@@ -15,8 +15,8 @@ module.exports = {
         executeCom(msg);
 
     } catch (error) {
-        console.log(`Error on inline Command`)
-        console.log(error)
+        console.log(`Error on inline Command`);
+        console.log(error);
     }
     },
 };
