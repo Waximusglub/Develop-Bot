@@ -8,7 +8,7 @@ module.exports = {
 
     .addSubcommand(subcommand => subcommand.setName("search")
       .setDescription('Search something on Wikipedia.')
-      .addUserOption(option => option.setName("topic")
+      .addStringOption(option => option.setName("topic")
         .setDescription("Introduce the topic you want to search on Wikipedia.")
         .setRequired(true))
       .addStringOption(option =>
@@ -43,7 +43,7 @@ module.exports = {
 
         const {options} = interaction;
 
-        const term = options.getString("term");
+        const term = options.getString("topic");
         const lang = options.getString("lang");
 
         const errEmbed = new EmbedBuilder()
@@ -63,7 +63,6 @@ module.exports = {
             };
       
             const response = await axios.request(options);
-      
             const { title, extract, thumbnail, content_urls } = response.data;
       
             //Build Embed
@@ -72,7 +71,7 @@ module.exports = {
               .setColor(0xcc0443)
               .setTitle(title)
               .setAuthor({ name: 'Wikipedia', iconURL: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Wikipedia_W_favicon_on_white_background.png', url: `https://${lang}.wikipedia.org/wiki/Main_Page` })
-              .setImage(thumbnail ? thumbnail.source : '')
+              .setImage((thumbnail ? thumbnail.source : null))
               .setDescription(extract)
               .setURL(content_urls.desktop.page)
               .addFields(
@@ -114,7 +113,7 @@ module.exports = {
               .setColor(0xcc0443)
               .setTitle(title)
               .setAuthor({ name: 'Wikipedia', iconURL: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Wikipedia_W_favicon_on_white_background.png', url: `https://${lang}.wikipedia.org/wiki/Main_Page` })
-              .setImage(thumbnail ? thumbnail.source : '')
+              .setImage(thumbnail ? thumbnail.source : null)
               .setDescription(extract)
               .setURL(content_urls.desktop.page)
               .addFields(

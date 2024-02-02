@@ -7,7 +7,7 @@ module.exports = {
         .addMentionableOption(option =>
             option
                 .setName('target')
-                .setDescription('The member you want to timeout.')
+                .setDescription('The member you want to kick out of the server.')
                 .setRequired(true)),
 
     async execute(interaction) {
