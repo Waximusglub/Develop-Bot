@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 
 module.exports = {
+  cooldown: 5,
   data: new SlashCommandBuilder()
     .setName('wikipedia')
     .setDescription('Wikipedia command.')

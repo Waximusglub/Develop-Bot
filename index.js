@@ -23,9 +23,15 @@ const client = new Client({
 });
 
 
+//Collections
+//###########################################
+client.commands = new Collection(); //Commands
+client.cooldowns = new Collection(); //Commands CD
+
+
 //Slash Command Handler
 //##################################################
-client.commands = new Collection();
+
 
 const foldersPath = path.join(__dirname, 'slash_commands');
 const commandFolders = fs.readdirSync(foldersPath);
