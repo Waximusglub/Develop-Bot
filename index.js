@@ -32,7 +32,6 @@ client.cooldowns = new Collection(); //Commands CD
 //Slash Command Handler
 //##################################################
 
-
 const foldersPath = path.join(__dirname, 'slash_commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
