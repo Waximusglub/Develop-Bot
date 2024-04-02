@@ -16,7 +16,7 @@ module.exports = {
         const file = new AttachmentBuilder('D:/Develop Bot/files/bye.gif');
 
         const byeEmbed = new EmbedBuilder()
-            .setColor(0x0099FF)
+            .setColor(0xcc0443)
             .setTitle(`Bye -_-`)
             .setImage('attachment://bye.gif')
 

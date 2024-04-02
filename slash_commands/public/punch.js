@@ -5,23 +5,22 @@ module.exports = {
     data: new SlashCommandBuilder()
 
         .setName('punch')
-        .setDescription('Slap someone very hard  c:<')
+        .setDescription('Punch someone very hard  c:<')
         .addUserOption(option =>
             option
                 .setName('target')
-                .setDescription('Who will recive the slap')
+                .setDescription('Who will recive the punch')
                 .setRequired(true)),
                 
-    async execute(interaction) {
+    execute(interaction) {
 
         const targetUser = interaction.options.getUser('target');
-        await interaction.reply(``);
 
         const mentionEmbed = new EmbedBuilder()
         .setColor(0xcc0443)
-        .setTitle(`${interaction.user.tag} slaped very hard ${targetUser.tag}!`)
+        .setTitle(`${interaction.user.tag} punched very hard ${targetUser.tag}!`)
 
-        interaction.reply({ embeds: [mentionEmbed], files: [file] })
+        interaction.reply({ embeds: [mentionEmbed] })
     },
 };
 
