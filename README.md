@@ -24,7 +24,7 @@ El bot de Discord está diseñado para proporcionar funcionalidades útiles y en
 1. Clona este repositorio:
 
 ```
-git clone https://github.com/tu_usuario/bot-de-discord.git
+git clone https://github.com/Waximusglub/Develop-Bot.git
 ```
 
 2. Instala las dependencias:
