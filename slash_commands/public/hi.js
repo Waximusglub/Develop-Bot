@@ -15,7 +15,7 @@ module.exports = {
 
         const mentionUser = interaction.options.getUser('mention');
 
-        const file = new AttachmentBuilder('D:/Develop Bot/files/hi.gif');
+        const file = new AttachmentBuilder('F:/Projects/Develop-Bot/files/hi.gif');
 
         if(mentionUser){
             

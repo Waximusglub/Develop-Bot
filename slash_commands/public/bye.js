@@ -13,7 +13,7 @@ module.exports = {
 
     execute(interaction) {
 
-        const file = new AttachmentBuilder('D:/Develop Bot/files/bye.gif');
+        const file = new AttachmentBuilder('F:/Projects/Develop-Bot/files/hi.gif');
 
         const byeEmbed = new EmbedBuilder()
             .setColor(0xcc0443)
